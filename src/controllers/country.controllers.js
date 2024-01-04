@@ -1,8 +1,10 @@
 const catchError = require('../utils/catchError');
 const Country = require('../models/Country');
+const User = require('../models/User');
+const City = require('../models/City');
 
 const getAll = catchError(async(req, res) => {
-    const countries = await Country.findAll();
+    const countries = await Country.findAll({ include: [User, City] });
     return res.json(countries);
 });
 
